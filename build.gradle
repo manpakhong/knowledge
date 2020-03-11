@@ -48,6 +48,7 @@ ext {
 }
 
 
+
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
@@ -115,6 +116,11 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
 	compile (group: 'org.springframework.data', name: 'spring-data-jpa', version: springDataVersion){
 		//exclude(module: 'slf4j-api-1.7.26')
+	}
+	
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-data
+	compile (group: 'org.springframework.security', name: 'spring-security-data', version: springDataVersion){
+		exclude(module: 'commons-logging')
 	}
 
 	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-web

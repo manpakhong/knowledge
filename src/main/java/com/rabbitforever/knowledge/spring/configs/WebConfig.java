@@ -45,10 +45,13 @@ public class WebConfig implements WebMvcConfigurer {
 				.setCachePeriod(31556926);
 	}
 
+
 	@Bean StandardServletMultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
 	}
 
+	
+	
 //	@Bean
 //	UrlBasedViewResolver tilesViewResolver() {
 //		UrlBasedViewResolver tilesViewResolver = new UrlBasedViewResolver();

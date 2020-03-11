@@ -25,7 +25,7 @@ public class UserServiceImpl implements  UserService {
 	private UserRepository userRepository;
 
 	public UserServiceImpl() {
-
+		super();
 	}
     @PostConstruct
     public void completeSetup() {

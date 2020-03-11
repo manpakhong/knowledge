@@ -91,36 +91,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//        .antMatchers("/index.jsp")
-//            .permitAll()
-//        .antMatchers("/**")
-//            .hasAnyRole("ADMIN", "USER")
-//        .and()
-//            .formLogin()
-//            .loginPage("/index")
-//            .defaultSuccessUrl("/home")
-//            .failureUrl("/login?error=true")
-//            .permitAll()
-//        .and()
-//            .logout()
-//            .logoutSuccessUrl("/login?logout=true")
-//            .invalidateHttpSession(true)
-//            .permitAll()
-//        .and()
-//            .csrf()
-//            .disable();
+	    http.authorizeRequests()
+		.antMatchers("/admin/**").access("hasRole('ROLE_USER')")
+		.and()
+		    .formLogin().loginPage("/login").failureUrl("/login?error")
+		    .usernameParameter("username").passwordParameter("password")		
+		.and()
+		    .logout().logoutSuccessUrl("/login?logout")
+		.and()
+		    .csrf().and().anonymous().disable(); 
     	
-        http.authorizeRequests()
-        .antMatchers("/login")
-        .permitAll()
-        .and()
-        .formLogin()
-        .permitAll()
-        .successHandler(successHandler)
-        .and()
-        .csrf()
-        .disable();
+//        http.authorizeRequests()
+//        .antMatchers("/login")
+//        .permitAll()
+//        .and()
+//        .formLogin()
+//        .permitAll()
+//        .successHandler(successHandler)
+//        .and()
+//        .csrf()
+//        .disable();
     }
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -129,4 +119,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
     }
+    
+
 }
