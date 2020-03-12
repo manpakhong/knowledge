@@ -80,27 +80,82 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 	
-	@Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-            .ignoring()
-                // Spring Security should completely ignore URLs starting with /resources/
-//                .antMatchers("/*.html");
-            .antMatchers("/resources/**");
-    }
-	
+//	@Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web
+//            .ignoring()
+//            .antMatchers("/resources/**");
+//    }
+//	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-	    http.authorizeRequests()
-		.antMatchers("/admin/**").access("hasRole('ROLE_USER')")
-		.and()
-		    .formLogin().loginPage("/login").failureUrl("/login?error")
-		    .usernameParameter("username").passwordParameter("password")		
-		.and()
-		    .logout().logoutSuccessUrl("/login?logout")
-		.and()
-		    .csrf().and().anonymous().disable(); 
     	
+      http.authorizeRequests()
+//      .antMatchers("**")
+//          .permitAll()
+      .antMatchers("/**")
+          .hasAnyRole("ADMIN", "USER")
+      .and()
+          .formLogin()
+          .loginPage("/login")
+          .successHandler(successHandler)
+          .defaultSuccessUrl("/web/admin")                
+          
+          .failureUrl("/login?error=true")
+          
+          .permitAll()
+      .and()
+          .logout()
+          .logoutSuccessUrl("/login?logout=true")
+          .invalidateHttpSession(true)
+          .permitAll()
+      .and()
+          .csrf()
+          .disable();
+  
+    	
+
+//	    http.authorizeRequests()
+//		.antMatchers("**").access("hasRole('ROLE_USER')")
+//		.and()
+//		    .formLogin().loginPage("/login").failureUrl("/login?error")
+//		    .usernameParameter("username").passwordParameter("password")		
+//		.and()
+//		    .logout().logoutSuccessUrl("/login?logout")
+//		.and()
+//		    .csrf(); 
+      
+//	    http.authorizeRequests().antMatchers("/login")
+//        .permitAll()
+//		.antMatchers("/**").access("hasRole('ROLE_USER')")
+//		.and()
+//		    .formLogin().loginPage("/login").failureUrl("/login?error")
+//		    .usernameParameter("username").passwordParameter("password")		
+//		.and()
+//		    .logout().logoutSuccessUrl("/login?logout")
+//		.and()
+//		    .csrf().and().anonymous().disable(); 
+    	
+	    
+//        http.authorizeRequests()
+//        .antMatchers("/login")
+//            .permitAll()
+//        .antMatchers("/**")
+//            .hasAnyRole("ADMIN", "USER")
+//        .and()
+//            .formLogin()
+//            .loginPage("/login")
+//            .defaultSuccessUrl("/home")
+//            .failureUrl("/login?error=true")
+//            .permitAll()
+//        .and()
+//            .logout()
+//            .logoutSuccessUrl("/login?logout=true")
+//            .invalidateHttpSession(true)
+//            .permitAll()
+//        .and()
+//            .csrf()
+//            .disable();
 //        http.authorizeRequests()
 //        .antMatchers("/login")
 //        .permitAll()
@@ -120,5 +175,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
     
-
+//    @Bean
+//    public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
+//        return new SecurityEvaluationContextExtension();
+//    }
 }

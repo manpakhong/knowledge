@@ -25,8 +25,8 @@ public class AppUser {
     private Date lastLogin;
 
     private AppUser() {
+    	
     }
-
     public AppUser(String name, String email, String password) {
         this.username = email;
         this.name = name;

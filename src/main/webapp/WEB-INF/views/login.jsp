@@ -49,12 +49,13 @@
 			<div class="msg">${msg}</div>
 		</c:if>
 
-		<form name='loginForm' action="<c:url value='/authenticate' />" method='POST'>
+		<form name='loginForm'
+			action="<c:url value='/login' />" method='POST'>
 
 			<table>
 				<tr>
 					<td>User:</td>
-					<td><input type='text' name='username' value=''></td>
+					<td><input type='text' name='username'></td>
 				</tr>
 				<tr>
 					<td>Password:</td>
