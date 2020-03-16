@@ -1,8 +1,10 @@
 package com.rabbitforever.knowledge.models.eos;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,7 +38,16 @@ public class AppUserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        final List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+       List<GrantedAuthority> authorities = null;
+       List<AppRole> appRoleList = user.getAppRoleList();
+       if (appRoleList != null && appRoleList.size() > 0) {
+    	   authorities = new ArrayList<GrantedAuthority>();
+    	   for (AppRole appRole: appRoleList) {
+    		   authorities.add(new SimpleGrantedAuthority(appRole.getName()));
+    	   }
+       }
+//       List<GrantedAuthority> authorities =  Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+//        authorities.add(Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));)
         return authorities;
     }
 
