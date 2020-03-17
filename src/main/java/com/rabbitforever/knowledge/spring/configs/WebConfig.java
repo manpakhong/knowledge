@@ -50,7 +50,7 @@ public class WebConfig implements WebMvcConfigurer {
 		return new StandardServletMultipartResolver();
 	}
 
-	
+
 	
 //	@Bean
 //	UrlBasedViewResolver tilesViewResolver() {
@@ -172,5 +172,8 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("home");
 //		registry.addViewController("/im").setViewName("instant_messenger/show");
+		
+        registry.addViewController("/index").setViewName("index");
+        registry.addViewController("/chat_web").setViewName("chat");
 	}
 }

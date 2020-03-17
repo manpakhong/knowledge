@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import com.rabbitforever.knowledge.spring.configs.DataServiceConfig;
 import com.rabbitforever.knowledge.spring.configs.SecurityConfig;
 import com.rabbitforever.knowledge.spring.configs.WebConfig;
+import com.rabbitforever.knowledge.spring.configs.WebSocketConfig;
 
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -20,7 +21,8 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		return new Class<?>[]{
 			DataServiceConfig.class
 			,
-			SecurityConfig.class
+			SecurityConfig.class,
+			WebSocketConfig.class
 
 		};
 	}
