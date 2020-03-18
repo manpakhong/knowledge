@@ -21,7 +21,7 @@ public class AppPrivilege {
     private Long id;
 
 
-	@Column(name = "NAME", nullable = false, unique=true)
+	@Column(name = "NAME", nullable = false)
     private String name;
 
 	@Column(name = "APP_ROLE_ID", nullable = false)

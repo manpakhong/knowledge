@@ -175,5 +175,6 @@ public class WebConfig implements WebMvcConfigurer {
 		
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/chat_web").setViewName("chat");
+        registry.addViewController("/chat_web_user").setViewName("chat_to_user");
 	}
 }

@@ -24,6 +24,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 			SecurityConfig.class,
 			WebSocketConfig.class
 
+
 		};
 	}
 
